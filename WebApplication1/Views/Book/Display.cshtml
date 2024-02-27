@@ -1,0 +1,38 @@
+﻿@page
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@model WebApplication1.Models.BookModel
+
+@{
+    var book = ViewBag.book;
+}
+
+<div style="border: 1px solid black; padding: 20px;">
+    <h2>@book.Name by @book.Author</h2>
+    <p>Page Number: @book.PageNumber</p>
+    <p>Due Date: @book.DueDate.ToString("d")</p>
+    <p style="color: @GetDueColor(book.DaysUntilDue);">
+        Days Until Due: @book.DaysUntilDue
+    </p>
+</div>
+
+@functions {
+    private string GetDueColor(int days)
+    {
+        if (days <= 0)
+        {
+            return "red";
+        }
+        else if (days <= 3)
+        {
+            return "yellow";
+        }
+        else
+        {
+            return "green";
+        }
+    }
+}
